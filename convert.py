@@ -41,10 +41,10 @@ def pdf_to_markdown(pdf_path, md_path):
         with open(md_path, "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
             
-        print(f"✅ Conversion complete! Markdown file saved as '{md_path}'")
+        print(f"Conversion complete! Markdown file saved as '{md_path}'")
 
     except Exception as e:
-        print(f"❌ An error occurred during PDF to Markdown conversion: {e}")
+        print(f"An error occurred during PDF to Markdown conversion: {e}")
         sys.exit(1)
 
 def markdown_to_pdf(md_path, pdf_path):
@@ -68,10 +68,10 @@ def markdown_to_pdf(md_path, pdf_path):
         
         pdf.output(pdf_path)
         
-        print(f"✅ Conversion complete! PDF file saved as '{pdf_path}'")
+        print(f"Conversion complete! PDF file saved as '{pdf_path}'")
 
     except Exception as e:
-        print(f"❌ An error occurred during Markdown to PDF conversion: {e}")
+        print(f"An error occurred during Markdown to PDF conversion: {e}")
         print("Please ensure you have run 'pip install fpdf2'")
         sys.exit(1)
 
@@ -88,9 +88,9 @@ def markdown_to_tex(md_path, tex_path):
             content = infile.read()
         with open(tex_path, 'w', encoding='utf-8') as outfile:
             outfile.write(content)
-        print(f"✅ Conversion complete! LaTeX file saved as '{tex_path}'")
+        print(f"Conversion complete! LaTeX file saved as '{tex_path}'")
     except Exception as e:
-        print(f"❌ An error occurred during Markdown to TeX conversion: {e}")
+        print(f"An error occurred during Markdown to TeX conversion: {e}")
         sys.exit(1)
 
 def tex_to_markdown(tex_path, md_path):
@@ -106,9 +106,9 @@ def tex_to_markdown(tex_path, md_path):
             content = infile.read()
         with open(md_path, 'w', encoding='utf-8') as outfile:
             outfile.write(content)
-        print(f"✅ Conversion complete! Markdown file saved as '{md_path}'")
+        print(f"Conversion complete! Markdown file saved as '{md_path}'")
     except Exception as e:
-        print(f"❌ An error occurred during TeX to Markdown conversion: {e}")
+        print(f"An error occurred during TeX to Markdown conversion: {e}")
         sys.exit(1)
 
 
@@ -141,7 +141,7 @@ def main():
         print("Direction: TeX -> Markdown")
         tex_to_markdown(input_file, output_file)
     else:
-        print("❌ Error: Unsupported file conversion.")
+        print("Error: Unsupported file conversion.")
         print("   Supported conversions are: .pdf -> .md, .md -> .pdf, .md -> .tex, and .tex -> .md")
         sys.exit(1)
 

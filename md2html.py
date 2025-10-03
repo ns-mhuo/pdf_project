@@ -341,21 +341,21 @@ def main():
     try:
         output_file = generate_confluence_ready_html(input_file)
         
-        print(f"✅ Confluence HTML generated successfully!")
-        print(f"📄 Input:  {input_file}")
-        print(f"📄 Output: {output_file}")
-        print(f"📊 Size:   {output_file.stat().st_size // 1024}KB")
+        print(f"Confluence HTML generated successfully!")
+        print(f"Input:  {input_file}")
+        print(f"Output: {output_file}")
+        print(f"Size:   {output_file.stat().st_size // 1024}KB")
         print(f"")
-        print(f"🎯 Ready for Confluence:")
+        print(f"Ready for Confluence:")
         print(f"   1. Open the HTML file in a browser")
         print(f"   2. Copy the content (Ctrl+A, Ctrl+C)")
         print(f"   3. Paste into Confluence page editor")
         
     except FileNotFoundError as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
         sys.exit(1)
     except Exception as e:
-        print(f"❌ An unexpected error occurred: {e}")
+        print(f"An unexpected error occurred: {e}")
         sys.exit(1)
 
 

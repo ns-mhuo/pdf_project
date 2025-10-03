@@ -22,7 +22,7 @@ def html_to_markdown(html_path, md_path):
         # Ensure the input file exists
         input_file = Path(html_path)
         if not input_file.is_file():
-            print(f"❌ Error: Input file not found at '{html_path}'")
+            print(f"Error: Input file not found at '{html_path}'")
             return
 
         # Read the HTML content
@@ -47,10 +47,10 @@ def html_to_markdown(html_path, md_path):
         with open(md_path, "w", encoding="utf-8") as md_file:
             md_file.write(markdown_content)
             
-        print(f"✅ Conversion complete! Markdown file saved as '{md_path}'")
+        print(f"Conversion complete! Markdown file saved as '{md_path}'")
 
     except Exception as e:
-        print(f"❌ An error occurred: {e}")
+        print(f"An error occurred: {e}")
 
 def main():
     """ Main entry point of the script """
