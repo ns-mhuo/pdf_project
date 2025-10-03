@@ -9,6 +9,69 @@ import sys
 from pathlib import Path
 
 
+def convert_tables(html):
+    """
+    Convert markdown tables to HTML tables
+    """
+    lines = html.split('\n')
+    result = []
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if line.strip().startswith('|') and '|' in line:
+            # Start of table
+            table_lines = []
+            # Collect all table lines
+            while i < len(lines) and lines[i].strip().startswith('|'):
+                table_lines.append(lines[i])
+                i += 1
+            # Convert table
+            table_html = convert_table_block(table_lines)
+            result.append(table_html)
+        else:
+            result.append(line)
+            i += 1
+    return '\n'.join(result)
+
+
+def convert_table_block(table_lines):
+    """
+    Convert a block of markdown table lines to HTML table
+    """
+    if len(table_lines) < 2:
+        return '\n'.join(table_lines)  # Not a valid table
+    
+    # Check if second line is separator
+    second_line = table_lines[1].strip()
+    if not re.match(r'^\|[\s\-\|:]+\|$', second_line):
+        return '\n'.join(table_lines)  # Not a valid table
+    
+    # Parse header
+    header_cells = [cell.strip() for cell in table_lines[0].split('|')[1:-1]]
+    # Parse body rows
+    body_rows = []
+    for line in table_lines[2:]:
+        if line.strip():
+            cells = [cell.strip() for cell in line.split('|')[1:-1]]
+            body_rows.append(cells)
+    
+    # Build HTML
+    html = '<table>\n'
+    # Header
+    html += '<tr>\n'
+    for cell in header_cells:
+        html += f'<th>{cell}</th>\n'
+    html += '</tr>\n'
+    # Body
+    for row in body_rows:
+        html += '<tr>\n'
+        for cell in row:
+            html += f'<td>{cell}</td>\n'
+        html += '</tr>\n'
+    html += '</table>'
+    return html
+
+
 def convert_markdown_to_confluence_html(md_content):
     """
     Convert markdown content to Confluence-compatible HTML
@@ -43,6 +106,9 @@ def convert_markdown_to_confluence_html(md_content):
     
     # Wrap consecutive list items in ul/ol tags
     html = re.sub(r'(<li>.*?</li>(?:\n<li>.*?</li>)*)', lambda m: f'<ul>\n{m.group(1)}\n</ul>', html, flags=re.DOTALL)
+    
+    # Convert tables
+    html = convert_tables(html)
     
     # Convert links
     html = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', html)

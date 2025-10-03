@@ -8,6 +8,7 @@ Converts an HTML file into Markdown format using the markdownify library.
 import sys
 from pathlib import Path
 from markdownify import markdownify as md
+from bs4 import BeautifulSoup
 
 def html_to_markdown(html_path, md_path):
     """
@@ -26,6 +27,18 @@ def html_to_markdown(html_path, md_path):
 
         # Read the HTML content
         html_content = input_file.read_text(encoding="utf-8")
+        
+        # Parse HTML and extract content from wiki-content div
+        soup = BeautifulSoup(html_content, 'html.parser')
+        content_div = soup.find('div', class_='wiki-content')
+        if content_div:
+            # Extract only the content inside the wiki-content div
+            html_content = str(content_div)
+        else:
+            # Fallback: try to find body content
+            body = soup.find('body')
+            if body:
+                html_content = str(body)
         
         # Convert HTML to Markdown
         markdown_content = md(html_content)
