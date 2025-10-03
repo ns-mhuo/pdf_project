@@ -1,16 +1,19 @@
-PDF, HTML, and Markdown Conversion Tools
+# PDF, HTML, and Markdown Conversion Tools
+
 A collection of simple, fast command-line tools in Python to convert between PDF, HTML, and Markdown formats.
 
-Features
-PDF to Markdown: Extracts text from all pages of a PDF and creates a structured Markdown file.
+## Features
 
-Markdown to HTML: Converts a Markdown file into a styled HTML file ready to be pasted into a Confluence page.
+* **Multi-format Converter**: Handles conversions between PDF, Markdown, and LaTeX (`.tex`) files.
 
-HTML to Markdown: Converts an HTML file into a clean Markdown file.
+* **Markdown to HTML**: Converts a Markdown file into a styled HTML file ready to be pasted into a Confluence page.
 
-Lightweight and easy to use.
+* **HTML to Markdown**: Converts an HTML file into a clean Markdown file.
 
-Project Structure
+* Lightweight and easy to use.
+
+## Project Structure
+
 The repository contains the following files:
 
 .
@@ -18,21 +21,22 @@ The repository contains the following files:
 ├── LICENSE
 ├── README.md
 ├── convert.py
-├── md2html.py
 ├── html2md.py
+├── md2html.py
 └── requirements.txt
 
-Setup and Installation
+## Setup and Installation
+
 Follow these steps to set up the project on your local machine.
 
-1. Clone the Repository
+**1.** Clone the **Repository**
 
-First, clone this repository to your desired location (e.g., inside your ~/git folder). Make sure you have SSH keys set up with your GitHub account.
+First, clone this repository to your desired location (e.g., inside your `~/git` folder). Make sure you have SSH keys set up with your GitHub account.
 
 git clone git@github.com:ns-mhuo/pdf_project.git
 cd pdf_project
 
-2. Create and Activate a Virtual Environment
+**2. Create and Activate a Virtual Environment**
 
 It is highly recommended to use a virtual environment to manage project dependencies.
 
@@ -42,44 +46,32 @@ python3 -m venv .venv
 # Activate the environment
 source .venv/bin/activate
 
-Your terminal prompt should now be prefixed with (.venv).
+Your terminal prompt should now be prefixed with `(.venv)`.
 
-3. Install Dependencies
+**3. Install Dependencies**
 
-Install the required Python packages from the requirements.txt file.
+Install the required Python packages from the `requirements.txt` file. If you've added a new tool, re-run this command to get the latest dependencies.
 
 pip3 install -r requirements.txt
 
-Usage
+## Usage
+
 With your virtual environment active, you can run the scripts from the command line.
 
-PDF to Markdown (convert.py)
-Syntax:
+### Multi-format Converter (`convert.py`)
 
-python3 convert.py <path_to_input.pdf> <path_to_output.md>
+This script handles conversions involving PDF, Markdown, and LaTeX. It automatically detects the direction based on the filenames you provide.
 
-Example:
+**Syntax (PDF to Markdown):**
 
-python3 convert.py report.pdf converted_report.md
+python3 convert.py <input.pdf> <output.md>
 
-Markdown to Confluence HTML (md2html.py)
-Syntax:
+**Syntax (Markdown to PDF):**
 
-python3 md2html.py <path_to_input.md>
+python3 convert.py <input.md> <output.pdf>
 
-Example:
-This command will generate a styled HTML file with a -confluence.html suffix.
+**Syntax (Markdown to TeX):**
 
-python3 md2html.py mydoc.md
+This is useful for getting a guaranteed plain text version of your Markdown file.
 
-HTML to Markdown (html2md.py)
-Syntax:
-
-python3 html2md.py <path_to_input.html> <path_to_output.md>
-
-Example:
-
-python3 html2md.py page.html converted_page.md
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
+python3 convert.py <input.md> <output.tex>
