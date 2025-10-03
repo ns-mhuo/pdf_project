@@ -246,14 +246,7 @@ def generate_confluence_ready_html(md_file_path, output_file_path=None):
         line-height: 1.5;
     }
     
-    /* Status indicators */
-    li:contains('✅') {
-        color: #00875a;
-    }
-    
-    li:contains('🔄') {
-        color: #ff8b00;
-    }
+    /* Status indicators - removed emoji-based styling */
     
     /* Links */
     a {
